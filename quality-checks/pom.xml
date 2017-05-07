@@ -7,6 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <quality-checks.xml.output.dir>${project.build.directory}/quality-checks/xml/</quality-checks.xml.output.dir>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
+        <maven-pmd-plugin.version>3.8</maven-pmd-plugin.version>
+        <findbugs-maven-plugin.version>3.0.4</findbugs-maven-plugin.version>
     </properties>
     <packaging>pom</packaging>
     <name>quality-checks</name>
@@ -14,6 +17,14 @@
         <module>calculator-commons</module>
         <module>calculator-impl</module>
     </modules>
+
+    <distributionManagement>
+        <site>
+            <id>${project.artifactId}</id>
+            <name>${project.name}</name>
+            <url>http://test-site</url>
+        </site>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -39,11 +50,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.8</version>
+                <version>${maven-pmd-plugin.version}</version>
                 <configuration>
                     <aggregate>true</aggregate>
-                    <targetDirectory>${quality-checks.xml.output.dir}</targetDirectory>
-                    <outputDirectory>${user.dir}/target/site/pmd-cpd</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -60,7 +69,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>validate</id>
@@ -71,7 +80,6 @@
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
                             <linkXRef>false</linkXRef>
-                            <outputFile>${quality-checks.xml.output.dir}/checkstyle-result.xml</outputFile>
                         </configuration>
                         <goals>
                             <goal>checkstyle-aggregate</goal>
@@ -84,68 +92,57 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
+                <version>${findbugs-maven-plugin.version}</version>
                 <configuration>
                     <failOnError>false</failOnError>
-                    <findbugsXmlOutputDirectory>${quality-checks.xml.output.dir}/findbugs</findbugsXmlOutputDirectory>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>check</goal>
                         </goals>
-                        <phase>verify</phase>
+                        <phase>validate</phase>
                     </execution>
                 </executions>
-            </plugin>
-
-            <!-- XML Plugin to convert FindBugs xml to html -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <transformationSets>
-                        <transformationSet>
-                            <dir>${quality-checks.xml.output.dir}/findbugs</dir>
-                            <outputDir>${user.dir}/target/site/findbugs</outputDir>
-                            <stylesheet>fancy-hist.xsl</stylesheet>
-                            <fileMappers>
-                                <fileMapper
-                                        implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
-                                    <pattern>findbugsXml\.xml</pattern>
-                                    <replacement>${artifactId}-findbugs\.html</replacement>
-                                </fileMapper>
-                            </fileMappers>
-                        </transformationSet>
-                    </transformationSets>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.google.code.findbugs</groupId>
-                        <artifactId>findbugs</artifactId>
-                        <version>2.0.0</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>bin</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle-aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${maven-pmd-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <configuration>
+                            <aggregate>true</aggregate>
+                        </configuration>
+                        <reports>
+                            <report>pmd</report>
+                            <report>cpd</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
