@@ -22,7 +22,7 @@
         <site>
             <id>${project.artifactId}</id>
             <name>${project.name}</name>
-            <url>http://test-site</url>
+            <url>http://localhost/${project.artifactId}</url>
         </site>
     </distributionManagement>
 
@@ -116,6 +116,9 @@
                 <version>${maven-checkstyle-plugin.version}</version>
                 <reportSets>
                     <reportSet>
+                        <configuration>
+                            <configLocation>google_checks.xml</configLocation>
+                        </configuration>
                         <reports>
                             <report>checkstyle-aggregate</report>
                         </reports>
