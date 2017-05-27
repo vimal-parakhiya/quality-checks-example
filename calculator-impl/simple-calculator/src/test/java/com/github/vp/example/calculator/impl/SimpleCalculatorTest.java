@@ -1,13 +1,13 @@
 package com.github.vp.example.calculator.impl;
 
-
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.data.Percentage.withPercentage;
+import static org.junit.Assert.*;
 
 /**
- * Created by vimalpar on 19/05/17.
+ * Created by vimalpar on 27/05/17.
  */
 public class SimpleCalculatorTest {
     private SimpleCalculator calculator = new SimpleCalculator();

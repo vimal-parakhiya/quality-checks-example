@@ -4,13 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.vp.example</groupId>
     <artifactId>quality-checks-example</artifactId>
-    <version>${project.release.version}</version>
+    <version>1.0.1</version>
     <properties>
         <quality-checks.xml.output.dir>${project.build.directory}/quality-checks/xml/</quality-checks.xml.output.dir>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
         <maven-pmd-plugin.version>3.8</maven-pmd-plugin.version>
         <findbugs-maven-plugin.version>3.0.4</findbugs-maven-plugin.version>
-        <project.release.version>1.0.1</project.release.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -50,7 +49,7 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>calculator-commons</artifactId>
-                <version>${project.release.version}</version>
+                <version>1.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

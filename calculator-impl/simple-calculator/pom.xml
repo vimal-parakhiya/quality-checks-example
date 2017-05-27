@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.github.vp.example</groupId>
     <artifactId>calculator-impl</artifactId>
-    <version>${project.release.version}</version>
+    <version>1.0.1</version>
     <relativePath>../</relativePath>
   </parent>
 

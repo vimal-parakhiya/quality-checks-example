@@ -4,7 +4,7 @@
   <parent>
     <artifactId>quality-checks-example</artifactId>
     <groupId>com.github.vp.example</groupId>
-    <version>${project.release.version}</version>
+    <version>1.0.1</version>
   </parent>
 
   <artifactId>calculator-impl</artifactId>
