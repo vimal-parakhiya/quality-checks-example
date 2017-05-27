@@ -6,20 +6,20 @@ import com.github.vp.example.calculator.Calculator;
  * Created by vimalpar on 07/05/17.
  */
 public class ScientificCalculator implements Calculator {
-    public double add(double a, double b) {
-        return a + b;
+    public double add(double operand1, double operand2) {
+        return operand1 + operand2;
     }
 
-    public double substract(double a, double b) {
-        return a - b;
+    public double substract(double operand1, double operand2) {
+        return operand1 - operand2;
     }
 
-    public double multiply(double a, double b) {
-        return a * b;
+    public double multiply(double operand1, double operand2) {
+        return operand1 * operand2;
     }
 
-    public double divide(double a, double b) {
-        return a / b;
+    public double divide(double operand1, double operand2) {
+        return operand1 / operand2;
     }
 
 }
