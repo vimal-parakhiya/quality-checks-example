@@ -1,5 +1,6 @@
 package com.github.vp.example.calculator.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -9,6 +10,7 @@ import static org.assertj.core.data.Percentage.withPercentage;
 /**
  * Created by vimalpar on 27/05/17.
  */
+@Ignore
 public class SimpleCalculatorTest {
     private SimpleCalculator calculator = new SimpleCalculator();
 
