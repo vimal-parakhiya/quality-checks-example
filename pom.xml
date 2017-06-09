@@ -120,9 +120,20 @@
 
     <profiles>
         <profile>
+            <id>localSonarScan</id>
+            <activation>
+                <property><name>localSonarScan</name></property>
+            </activation>
+            <properties>
+                <sonar.analysis.mode>preview</sonar.analysis.mode>
+                <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
+                <performSonarScan>true</performSonarScan>
+            </properties>
+        </profile>
+        <profile>
             <id>sonar</id>
             <activation>
-                <property><name>activateSonar</name></property>
+                <property><name>performSonarScan</name></property>
             </activation>
             <properties>
                 <sonar.host.url>http://localhost:9000</sonar.host.url>
